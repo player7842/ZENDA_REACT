@@ -1,3 +1,4 @@
+import { useState, type FormEvent, type ChangeEvent } from 'react';
 import CardAccion from './CardAccion';
 
 interface LoginProps {
@@ -5,26 +6,54 @@ interface LoginProps {
 }
 
 const Login = ({ onAccion }: LoginProps) => {
-  const handleSubmit = (evento: React.FormEvent<HTMLFormElement>) => {
-    evento.preventDefault();
-    const formulario = evento.currentTarget;
-    const usuario = (formulario.elements.namedItem('usuario') as HTMLInputElement).value;
-    const contrasena = (formulario.elements.namedItem('contrasena') as HTMLInputElement).value;
+  // 🔹 Estados tipados explícitamente
+  const [usuario, setUsuario] = useState<string>("");
+  const [contrasena, setContrasena] = useState<string>("");
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // ✅ Leemos directamente del estado, NO del formulario
     alert(`Datos de acceso ingresados:\nUsuario: ${usuario}\nContraseña: ${contrasena}`);
   };
 
   return (
     <div style={{ padding: '1.5rem' }}>
-      <h2 style={{ color: '#2f9e5c' }}>Login</h2>
-
+      <h2 style={{ color: '#39A900' }}>Login</h2>
+      
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', maxWidth: '260px' }}>
-        <input name="usuario" type="text" placeholder="Usuario" required style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #7fd8a0' }} />
-        <input name="contrasena" type="password" placeholder="Contraseña" required style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #7fd8a0' }} />
-        <button type="submit" style={{ background: '#2f9e5c', color: 'white', border: 'none', borderRadius: '6px', padding: '0.5rem' }}>
+        {/* 🔹 Input conectado al estado: value + onChange */}
+        <input
+          type="text"
+          placeholder="Usuario"
+          value={usuario}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setUsuario(e.target.value)}
+          required
+          style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #A8E063' }}
+        />
+        
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={contrasena}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setContrasena(e.target.value)}
+          required
+          style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #A8E063' }}
+        />
+
+        <button
+          type="submit"
+          style={{ background: '#39A900', color: 'white', border: 'none', borderRadius: '6px', padding: '0.5rem' }}
+        >
           Ingresar
         </button>
       </form>
+
+      {/* ✅ Visualización DINÁMICA: se actualiza mientras escribes */}
+      {usuario && (
+        <p style={{ marginTop: '0.8rem', color: '#39A900', fontSize: '0.9rem' }}>
+          👋 Hola, <strong>{usuario}</strong> — bienvenido a ZENDA
+        </p>
+      )}
 
       <CardAccion
         titulo="Acceso de invitado"
