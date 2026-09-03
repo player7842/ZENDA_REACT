@@ -6,11 +6,110 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #ffffff;
+  background-color: #FFFFFF;
+  color: #1B1B1B; /* Texto principal modo claro */
+  line-height: 1.6;
 }
 
+/* ---------- CONTENEDOR PRINCIPAL ---------- */
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+/* ---------- COLORES CORPORATIVOS ZENDA ---------- */
+:root {
+  --zenda-verde-principal: #39A900;
+  --zenda-verde-oscuro: #2D7D00;
+  --zenda-verde-claro: #A8E063;
+  --zenda-verde-suave: #E8F5E1;
+  --zenda-verde-muy-claro: #F2FAF0;
+
+  --zenda-gris-claro: #F5F7FA;
+  --zenda-gris-medio: #DDE2E5;
+  --zenda-gris-oscuro: #B5BAC1;
+  --zenda-gris-profundo: #636A72;
+
+  --zenda-exito: #22C55E;
+  --zenda-advertencia: #FACC15;
+  --zenda-error: #EF4444;
+  --zenda-informacion: #3B82F6;
+}
+
+/* ---------- TIPOGRAFÍA ---------- */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--zenda-verde-principal);
+  font-weight: 600;
+}
+
+p {
+  color: #4E5157; /* Texto secundario */
+}
+
+/* ---------- BOTONES ---------- */
+button {
+  font-family: inherit;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.btn-principal {
+  background: linear-gradient(90deg, #39A900 0%, #2D7D00 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+}
+
+/* ---------- INPUTS Y FORMULARIOS ---------- */
+input, select {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--zenda-gris-oscuro);
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  color: #1B1B1B;
+  transition: border-color 0.2s ease;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--zenda-verde-principal);
+  box-shadow: 0 0 0 2px rgba(57, 169, 0, 0.15);
+}
+
+/* ---------- TARJETAS Y CONTENEDORES ---------- */
+.tarjeta {
+  background-color: var(--zenda-verde-muy-claro);
+  border: 1px solid var(--zenda-verde-claro);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+/* ---------- ENLACES ---------- */
+a {
+  color: var(--zenda-verde-principal);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- LISTAS ---------- */
+ul {
+  padding-left: 1.5rem;
+}
+
+li {
+  color: #4E5157;
+  margin-bottom: 0.3rem;
 }
