@@ -1,12 +1,12 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
-import CardAccion from './CardAccion';
+import CardAccion from '../components/CardAccion';
 
 interface RegistroProps {
   onAccion: (modulo: string, mensaje: string) => void;
 }
 
 const Registro = ({ onAccion }: RegistroProps) => {
-  // 🔹 Tres estados tipados
+  // Tres estados tipados
   const [usuario, setUsuario] = useState<string>("");
   const [correo, setCorreo] = useState<string>("");
   const [contrasena, setContrasena] = useState<string>("");
@@ -53,7 +53,7 @@ const Registro = ({ onAccion }: RegistroProps) => {
         </button>
       </form>
 
-      {/* ✅ Resumen dinámico: se construye SOLO con lo que escribes */}
+      {/* Resumen dinámico: se construye SOLO con lo que escribes */}
       {(usuario || correo) && (
         <div style={{ marginTop: '1rem', padding: '0.8rem', background: '#F2FAF0', borderRadius: '6px', fontSize: '0.9rem' }}>
           <p><strong>Usuario:</strong> {usuario || "pendiente"}</p>

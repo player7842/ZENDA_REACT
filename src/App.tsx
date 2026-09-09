@@ -1,46 +1,71 @@
-// App.tsx
-import { useState } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Usuarios from './components/Usuarios';
-import Proyectos from './components/Proyectos';
-import Login from './components/Login';
-import Registro from './components/Registro';
-import Reportes from './components/Reportes';
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import MenuPrincipal from "./components/MenuPrincipal";
+import MenuModulos from "./components/MenuModulos";
 
+// Páginas principales
+import Inicio from "./pages/Inicio";
+import Login from "./pages/Login";
+import Registro from "./pages/Registro";
+
+// Módulos
+import Usuarios from "./pages/Usuarios";
+import DetalleUsuario from "./pages/DetalleUsuario";
+import Proyectos from "./pages/Proyectos";
+import DetalleProyecto from "./pages/DetalleProyecto";
+import Reportes from "./pages/Reportes";
 
 function App() {
-  const [pagina, setPagina] = useState<string>('usuarios');
-
+  // función para las alertas
   const handleAccion = (modulo: string, mensaje: string) => {
     alert(`Módulo: ${modulo}\nAcción: ${mensaje}`);
   };
 
   return (
-    <div style={{ fontFamily: 'sans-serif' }}>
+    <div
+      style={{
+        fontFamily: "'Segoe UI', sans-serif",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "#FFFFFF",
+      }}
+    >
       <Header />
+      <MenuPrincipal />
+      <MenuModulos />
 
-      <div style={{ display: 'flex' }}>
-        <div style={{ flex: 1, padding: '20px' }}>
-          <nav style={{ marginBottom: '20px' }}>
-            <button onClick={() => setPagina('usuarios')}>Ver Usuarios</button>
-            <button onClick={() => setPagina('proyectos')} style={{ marginLeft: '10px' }}>Ver Proyectos</button>
-            <button onClick={() => setPagina('login')} style={{ marginLeft: '10px' }}>Ver Login</button>
-            <button onClick={() => setPagina('registro')} style={{ marginLeft: '10px' }}>Ver Registro</button>
-            <button onClick={() => setPagina('reportes')} style={{ marginLeft: '10px' }}>Ver Reportes</button>
-          </nav>
+      <main style={{ flex: 1, padding: "1.5rem", maxWidth: "1200px", margin: "0 auto", width: "100%" }}>
+        <Routes>
+          {/* Páginas principales — SIN onAccion */}
+          <Route path="/" element={<Inicio />} />
+          
+          {/* Páginas que NECESITAN onAccion — se la pasamos */}
+          <Route path="/login" element={<Login onAccion={handleAccion} />} />
+          <Route path="/registro" element={<Registro onAccion={handleAccion} />} />
 
-          <hr />
+          {/* Módulos con onAccion */}
+          <Route path="/usuarios" element={<Usuarios onAccion={handleAccion} />} />
+          <Route path="/usuarios/:id" element={<DetalleUsuario />} />
 
-          <main>
-            {pagina === 'usuarios' && <Usuarios onAccion={handleAccion} />}
-            {pagina === 'proyectos' && <Proyectos onAccion={handleAccion} />}
-            {pagina === 'login' && <Login onAccion={handleAccion} />}
-            {pagina === 'registro' && <Registro onAccion={handleAccion} />}
-            {pagina === 'reportes' && <Reportes onAccion={handleAccion} />}
-          </main>
-        </div>
-      </div>
+          <Route path="/proyectos" element={<Proyectos onAccion={handleAccion} />} />
+          <Route path="/proyectos/:nombreId" element={<DetalleProyecto />} />
+
+          <Route path="/reportes" element={<Reportes onAccion={handleAccion} />} />
+
+          {/* Ruta 404 */}
+          <Route
+            path="*"
+            element={
+              <div style={{ padding: "3rem", textAlign: "center" }}>
+                <h2 style={{ color: "#EF4444", fontSize: "1.8rem" }}>Error 404</h2>
+                <p style={{ color: "#636A72", marginTop: "0.5rem" }}>Página no encontrada en ZENDA</p>
+              </div>
+            }
+          />
+        </Routes>
+      </main>
 
       <Footer />
     </div>

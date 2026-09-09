@@ -1,18 +1,18 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
-import CardAccion from './CardAccion';
+import CardAccion from '../components/CardAccion';
 
 interface LoginProps {
   onAccion: (modulo: string, mensaje: string) => void;
 }
 
 const Login = ({ onAccion }: LoginProps) => {
-  // 🔹 Estados tipados explícitamente
+  //Estados tipados explícitamente
   const [usuario, setUsuario] = useState<string>("");
   const [contrasena, setContrasena] = useState<string>("");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // ✅ Leemos directamente del estado, NO del formulario
+    //Leemos directamente del estado, NO del formulario
     alert(`Datos de acceso ingresados:\nUsuario: ${usuario}\nContraseña: ${contrasena}`);
   };
 
@@ -21,7 +21,7 @@ const Login = ({ onAccion }: LoginProps) => {
       <h2 style={{ color: '#39A900' }}>Login</h2>
       
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', maxWidth: '260px' }}>
-        {/* 🔹 Input conectado al estado: value + onChange */}
+        {/* Input conectado al estado: value + onChange */}
         <input
           type="text"
           placeholder="Usuario"
@@ -48,7 +48,7 @@ const Login = ({ onAccion }: LoginProps) => {
         </button>
       </form>
 
-      {/* ✅ Visualización DINÁMICA: se actualiza mientras escribes */}
+      {/*Visualización DINÁMICA: se actualiza mientras escribes */}
       {usuario && (
         <p style={{ marginTop: '0.8rem', color: '#39A900', fontSize: '0.9rem' }}>
           👋 Hola, <strong>{usuario}</strong> — bienvenido a ZENDA

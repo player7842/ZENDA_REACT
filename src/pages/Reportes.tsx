@@ -1,5 +1,5 @@
 import { useState, type ChangeEvent } from 'react';
-import CardAccion from './CardAccion';
+import CardAccion from '../components/CardAccion';
 
 interface Reporte {
   proyecto: string;
@@ -15,7 +15,7 @@ interface ReportesProps {
 const Reportes = ({ onAccion }: ReportesProps) => {
   const [busqueda, setBusqueda] = useState<string>("");
 
-  // ✅ 3 REGISTROS DE REPORTES → completamos los 10 totales
+  // 3 REGISTROS DE REPORTES → completamos los 10 totales
   const [reportes] = useState<Reporte[]>([
     { proyecto: "App de Inventario", fase: "Fase 1 - Análisis", resultado: "✅ Aprobada", fecha: "2026-08-28" },
     { proyecto: "App de Inventario", fase: "Fase 2 - Diseño", resultado: "⚠️ Con observaciones", fecha: "2026-09-01" },
