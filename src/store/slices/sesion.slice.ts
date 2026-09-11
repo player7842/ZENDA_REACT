@@ -1,10 +1,12 @@
-// store/slices/sesion.slice.ts
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
-// ✅ Datos que coinciden con tus tablas de ZENDA
-interface UsuarioSesion {
+// Modelo vinculado a las tablas de la base de datos de ZENDA[cite: 2]
+export interface UsuarioSesion {
+  id: number;
   nombre: string;
-  rol: "Aprendiz" | "Instructor" | "Coordinador" | "Administrador";
+  correo: string;
+  rol: "Aprendiz" | "Instructor" | "Coordinador" | "Administrador"; //[cite: 2]
   ficha?: string;
   grupo?: string;
 }
@@ -14,13 +16,14 @@ interface SesionState {
   autenticado: boolean;
 }
 
-// Estado inicial
 const initialState: SesionState = {
   usuario: {
+    id: 1,
     nombre: "Camilo Torres",
-    rol: "Instructor",
-    ficha: "CGMLTI-001",
-    grupo: "Desarrollo Software"
+    correo: "ctorres@sena.edu.co",
+    rol: "Instructor", // Rol principal de seguimiento en ZENDA[cite: 2]
+    ficha: "2558341 - CGMLTI",
+    grupo: "Grupo 01 - Proyecto Formativo"
   },
   autenticado: true
 };
@@ -29,12 +32,10 @@ const sesionSlice = createSlice({
   name: "sesion",
   initialState,
   reducers: {
-    // Simula inicio de sesión
     iniciarSesion: (state, action: PayloadAction<UsuarioSesion>) => {
       state.usuario = action.payload;
       state.autenticado = true;
     },
-    // Simula cierre de sesión
     cerrarSesion: (state) => {
       state.usuario = null;
       state.autenticado = false;
@@ -42,8 +43,5 @@ const sesionSlice = createSlice({
   }
 });
 
-// Exportar acciones para usarlas en componentes
 export const { iniciarSesion, cerrarSesion } = sesionSlice.actions;
-
-// Exportar reducer para el Store
 export default sesionSlice.reducer;

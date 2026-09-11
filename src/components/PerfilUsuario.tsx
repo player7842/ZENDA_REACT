@@ -1,46 +1,40 @@
-// components/PerfilUsuario.tsx
 import { useSelector } from "react-redux";
-import { RootState } from "../store";
+// 💡 SOLUCIÓN: Uso explícito de 'import type' para satisfacer verbatimModuleSyntax
+import type { RootState } from "../store/index";
 
 const PerfilUsuario = () => {
-  // ✅ Leemos datos del estado global — se actualiza automáticamente
   const usuario = useSelector((state: RootState) => state.sesion.usuario);
   const autenticado = useSelector((state: RootState) => state.sesion.autenticado);
 
   if (!autenticado || !usuario) {
     return (
-      <div style={{ padding: "0.6rem 1rem", background: "#F5F7FA", borderRadius: "8px", fontSize: "0.9rem" }}>
+      <div style={{ padding: "0.5rem 1rem", background: "#F5F7FA", borderRadius: "8px", fontSize: "0.85rem" }}>
         🔒 No has iniciado sesión
       </div>
     );
   }
 
-  // Colores según rol
-  const colorRol = usuario.rol === "Instructor" ? "#39A900" : "#3B82F6";
+  // Verde institucional SENA (#39A900) para roles de evaluación/coordinación[cite: 2]
+  const colorRol = usuario.rol === "Instructor" || usuario.rol === "Coordinador" ? "#39A900" : "#3B82F6";
 
   return (
     <div style={{
-      padding: "0.7rem 1rem",
+      padding: "0.6rem 1rem",
       background: "#FFFFFF",
-      border: "1px solid #E8F5E1",
-      borderRadius: "10px",
-      maxWidth: "280px",
-      boxShadow: "0 2px 6px rgba(57, 169, 0, 0.06)"
+      border: "1px solid #E2E8F0",
+      borderRadius: "8px",
+      boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
+      fontSize: "0.85rem"
     }}>
-      <p style={{ margin: 0, fontWeight: "600", color: "#1B1B1B" }}>
+      <p style={{ margin: 0, fontWeight: "bold", color: "#1E293B" }}>
         👤 {usuario.nombre}
       </p>
-      <p style={{ margin: "0.25rem 0", fontSize: "0.85rem", color: colorRol, fontWeight: "500" }}>
-        {usuario.rol}
+      <p style={{ margin: "0.2rem 0", color: colorRol, fontWeight: "600" }}>
+        Rol: {usuario.rol}
       </p>
       {usuario.ficha && (
-        <p style={{ margin: "0.15rem 0", fontSize: "0.8rem", color: "#636A72" }}>
+        <p style={{ margin: 0, color: "#64748B", fontSize: "0.78rem" }}>
           📋 Ficha: {usuario.ficha}
-        </p>
-      )}
-      {usuario.grupo && (
-        <p style={{ margin: "0.15rem 0 0 0", fontSize: "0.8rem", color: "#636A72" }}>
-          👥 Grupo: {usuario.grupo}
         </p>
       )}
     </div>

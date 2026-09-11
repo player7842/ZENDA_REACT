@@ -1,5 +1,3 @@
-import PerfilUsuario from "./PerfilUsuario";
-
 const Header = () => {
   return (
     <header style={{ 
@@ -11,7 +9,6 @@ const Header = () => {
       alignItems: "center"
     }}>
       <h1 style={{ color: "#39A900", margin: 0, fontSize: "1.3rem" }}>ZENDA</h1>
-      <PerfilUsuario /> {/* ✅ Aparece en TODA la aplicación automáticamente */}
     </header>
   );
 };
