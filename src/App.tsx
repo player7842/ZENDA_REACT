@@ -16,6 +16,9 @@ import Proyectos from "./pages/Proyectos";
 import DetalleProyecto from "./pages/DetalleProyecto";
 import Reportes from "./pages/Reportes";
 
+// perfil
+import PerfilUsuario from "./components/PerfilUsuario"; // ✅ Importar
+
 function App() {
   // función para las alertas
   const handleAccion = (modulo: string, mensaje: string) => {
@@ -33,6 +36,7 @@ function App() {
       }}
     >
       <Header />
+      <PerfilUsuario />
       <MenuPrincipal />
       <MenuModulos />
 
